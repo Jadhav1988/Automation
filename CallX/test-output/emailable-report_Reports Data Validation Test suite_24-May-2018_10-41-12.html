@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Report for Reports Data Validation Test suite</title>
+<style type="text/css">
+table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}
+td,th {border:1px solid #009;padding:.25em .5em}
+.result th {vertical-align:bottom}
+.param th {padding-left:1em;padding-right:1em}
+.param td {padding-left:.5em;padding-right:2em}
+.stripe td,.stripe th {background-color: #E6EBF9}
+b.passed {color: green;}
+b.failed {color: red;}
+b.skipped {color: violet;}
+b.mailreport {font-family: sans-serif;}
+b.classname {font-size: large; font-family: sans-serif;}
+.special {text-decoration: underline;color: blue;}
+.numi,.numi_attn {text-align:left}
+.total td {font-weight:bold}
+.passedodd td {background-color: #0A0}
+.passedeven td {background-color: #3F3}
+.skippedodd td {background-color: #CCC}
+.skippedodd td {background-color: #DDD}
+.failedodd td,.numi_attn {background-color: #F33}
+.failedeven td,.stripe .numi_attn {background-color: #D00}
+.stacktrace {white-space:pre;font-family:monospace}
+.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" class="testOverview">
+<tr><th>Test</th><th>Methods<br/>(Passed)</th><th># skipped</th><th># failed</th><th>Error messages</th><th>Parameters</th><th>Start<br/>Time</th><th>End<br/>Time</th><th>Total<br/>Time</th></tr>
+<tr><td style="text-align:left;padding-right:2em"><a href="#t1">Reports Regression test</a></td><td class="numi">0</td><td class="numi_attn">2</td><td class="numi">0</td><td class="numi"><b class="special">adminLogin</b> :- 
+java.lang.NullPointerException
+<br>---------------------------------------------------------------------<br>
+<b class="special">validateUiAndApiReportsData</b> :- 
+java.lang.Throwable: Method ReportsDataValidationDP.validateUiAndApiReportsData(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:1, instance:com.fission.callx.ReportsDataValidationDP@63e2203c] depends on not successfully finished methods
+<br>---------------------------------------------------------------------<br>
+</td>
+<td class="numi"><br>
+<br>
+</td>
+<td class="numi">10:41:12</td></td>
+<td class="numi">10:41:12</td></td>
+<td class="numi">0.1 seconds</td></tr>
+<tr class="stripe"><td style="text-align:left;padding-right:2em"><a href="#t2">Sale Count Regression test</a></td><td class="numi">0</td><td class="numi_attn">2</td><td class="numi">0</td><td class="numi"><b class="special">adminLogin</b> :- 
+java.lang.NullPointerException
+<br>---------------------------------------------------------------------<br>
+<b class="special">compareUIAndAPISalesCount</b> :- 
+java.lang.Throwable: Method SalesCountDP.compareUIAndAPISalesCount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:1, instance:com.fission.callx.SalesCountDP@1e965684] depends on not successfully finished methods
+<br>---------------------------------------------------------------------<br>
+</td>
+<td class="numi"><br>
+<br>
+</td>
+<td class="numi">10:41:12</td></td>
+<td class="numi">10:41:12</td></td>
+<td class="numi">0.0 seconds</td></tr>
+<tr class="total"><td>Total</td>
+<td class="numi">0</td><td class="numi_attn">4</td><td class="numi">0</td><td class="numi"> </td><td class="numi"> </td><td class="numi"> </td><td class="numi"> </td><td class="numi">0.0 minutes</td><td colspan="3">&nbsp;</td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" class="methodOverview" id="summary">
+<tr><th>Class</th><th>Method</th><th>Start time</th><th>End time</th><th>Time duration<br/>(in ms)</th></tr>
+<tr id="t1"><th colspan="5">Reports Regression test &#8212; failed (configuration methods)</th></tr>
+<tr class="failedodd"><td>com.fission.callx.ReportsDataValidationDP</td><td><a href="#m1"><b>setup</b>  </a></td><td>10:41:12</td><td>10:41:12</td><td>32</td></tr>
+<tr><th colspan="5">Reports Regression test &#8212; skipped (configuration methods)</th></tr>
+<tr class="skippedodd"><td>com.fission.callx.ReportsDataValidationDP</td><td><a href="#m2"><b>browserCleanUp</b>  </a></td><td>10:41:12</td><td>10:41:12</td><td>0</td></tr>
+<tr><th colspan="5">Reports Regression test &#8212; skipped</th></tr>
+<tr class="skippedodd"><td rowspan="2">com.fission.callx.ReportsDataValidationDP</td><td><a href="#m3"><b>adminLogin</b>  ("Login as Admin")</a></td><td>10:41:12</td><td>10:41:12</td><td>0</td></tr><tr class="skippedodd"><td><a href="#m4"><b>validateUiAndApiReportsData</b>  ("Get Reports Data")</a></td><td>10:41:12</td><td>10:41:12</td><td>0</td></tr>
+<tr id="t2"><th colspan="5">Sale Count Regression test &#8212; failed (configuration methods)</th></tr>
+<tr class="failedodd"><td>com.fission.callx.SalesCountDP</td><td><a href="#m5"><b>setup</b>  </a></td><td>10:41:12</td><td>10:41:12</td><td>3</td></tr>
+<tr><th colspan="5">Sale Count Regression test &#8212; skipped (configuration methods)</th></tr>
+<tr class="skippedodd"><td>com.fission.callx.SalesCountDP</td><td><a href="#m6"><b>browserCleanUp</b>  </a></td><td>10:41:12</td><td>10:41:12</td><td>0</td></tr>
+<tr><th colspan="5">Sale Count Regression test &#8212; skipped</th></tr>
+<tr class="skippedodd"><td rowspan="2">com.fission.callx.SalesCountDP</td><td><a href="#m7"><b>adminLogin</b>  ("Login as Admin")</a></td><td>10:41:12</td><td>10:41:12</td><td>0</td></tr><tr class="skippedodd"><td><a href="#m8"><b>compareUIAndAPISalesCount</b>  ("Get API Data")</a></td><td>10:41:12</td><td>10:41:12</td><td>0</td></tr>
+</table>
+<h1>Reports Regression test</h1>
+<h2 id="m1">com.fission.callx.ReportsDataValidationDP:setup</h2>
+<div>
+<div class="stacktrace">java.lang.NullPointerException
+	at com.fission.callx.utilis.CommonSettings.getBrowserName(CommonSettings.java:764)
+	at com.fission.callx.ReportsDataValidationDP.setup(ReportsDataValidationDP.java:81)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:451)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:142)
+	at org.testng.TestRunner.beforeRun(TestRunner.java:529)
+	at org.testng.TestRunner.run(TestRunner.java:497)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.runSuites(TestNG.java:1028)
+	at org.testng.TestNG.run(TestNG.java:996)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</div>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m2">com.fission.callx.ReportsDataValidationDP:browserCleanUp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m3">com.fission.callx.ReportsDataValidationDP:adminLogin</h2>
+<div>
+<div class="stacktrace">java.lang.NullPointerException
+	at com.fission.callx.utilis.CommonSettings.getBrowserName(CommonSettings.java:764)
+	at com.fission.callx.ReportsDataValidationDP.setup(ReportsDataValidationDP.java:81)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:451)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:142)
+	at org.testng.TestRunner.beforeRun(TestRunner.java:529)
+	at org.testng.TestRunner.run(TestRunner.java:497)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.runSuites(TestNG.java:1028)
+	at org.testng.TestNG.run(TestNG.java:996)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</div>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m4">com.fission.callx.ReportsDataValidationDP:validateUiAndApiReportsData</h2>
+<div>
+<div class="stacktrace">java.lang.Throwable: Method ReportsDataValidationDP.validateUiAndApiReportsData(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:1, instance:com.fission.callx.ReportsDataValidationDP@63e2203c] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:878)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.runSuites(TestNG.java:1028)
+	at org.testng.TestNG.run(TestNG.java:996)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</div>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h1>Sale Count Regression test</h1>
+<h2 id="m5">com.fission.callx.SalesCountDP:setup</h2>
+<div>
+<div class="stacktrace">java.lang.NullPointerException
+	at com.fission.callx.utilis.CommonSettings.getBrowserName(CommonSettings.java:764)
+	at com.fission.callx.SalesCountDP.setup(SalesCountDP.java:70)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:451)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:142)
+	at org.testng.TestRunner.beforeRun(TestRunner.java:529)
+	at org.testng.TestRunner.run(TestRunner.java:497)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.runSuites(TestNG.java:1028)
+	at org.testng.TestNG.run(TestNG.java:996)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</div>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m6">com.fission.callx.SalesCountDP:browserCleanUp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m7">com.fission.callx.SalesCountDP:adminLogin</h2>
+<div>
+<div class="stacktrace">java.lang.NullPointerException
+	at com.fission.callx.utilis.CommonSettings.getBrowserName(CommonSettings.java:764)
+	at com.fission.callx.SalesCountDP.setup(SalesCountDP.java:70)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:451)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:142)
+	at org.testng.TestRunner.beforeRun(TestRunner.java:529)
+	at org.testng.TestRunner.run(TestRunner.java:497)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.runSuites(TestNG.java:1028)
+	at org.testng.TestNG.run(TestNG.java:996)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</div>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m8">com.fission.callx.SalesCountDP:compareUIAndAPISalesCount</h2>
+<div>
+<div class="stacktrace">java.lang.Throwable: Method SalesCountDP.compareUIAndAPISalesCount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:1, instance:com.fission.callx.SalesCountDP@1e965684] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:878)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.runSuites(TestNG.java:1028)
+	at org.testng.TestNG.run(TestNG.java:996)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</div>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<center> Report customized by 'Automation team @ Callhealth' </center>
+</body></html>

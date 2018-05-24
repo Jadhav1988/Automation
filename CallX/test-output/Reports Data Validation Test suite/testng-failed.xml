@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="-1" guice-stage="DEVELOPMENT" verbose="2" name="Failed suite [Reports Data Validation Test suite]">
+  <listeners>
+    <listener class-name="com.fission.callx.utilis.TestNGCustomReportListener"/>
+  </listeners>
+  <test verbose="2" name="Reports Regression test(failed)">
+    <classes>
+      <class name="com.fission.callx.ReportsDataValidationDP">
+        <methods>
+          <include name="adminLogin"/>
+          <include name="browserCleanUp"/>
+          <include name="setup"/>
+          <include name="failureCatcher"/>
+          <include name="validateUiAndApiReportsData" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- com.fission.callx.ReportsDataValidationDP -->
+    </classes>
+  </test> <!-- Reports Regression test(failed) -->
+  <test verbose="2" name="Sale Count Regression test(failed)">
+    <classes>
+      <class name="com.fission.callx.SalesCountDP">
+        <methods>
+          <include name="compareUIAndAPISalesCount" invocation-numbers="2"/>
+          <include name="browserCleanUp"/>
+          <include name="adminLogin"/>
+          <include name="setup"/>
+          <include name="failureCatcher"/>
+        </methods>
+      </class> <!-- com.fission.callx.SalesCountDP -->
+    </classes>
+  </test> <!-- Sale Count Regression test(failed) -->
+</suite> <!-- Failed suite [Reports Data Validation Test suite] -->

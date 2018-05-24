@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="-1" guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.fission.callx.TestClass">
+        <methods>
+          <include name="validateUIAnaAPIData"/>
+          <include name="getReportData"/>
+          <include name="adminLogin"/>
+          <include name="browserCleanUp"/>
+          <include name="setup"/>
+          <include name="failureCatcher"/>
+        </methods>
+      </class> <!-- com.fission.callx.TestClass -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

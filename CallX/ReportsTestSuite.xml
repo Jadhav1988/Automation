@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Reports Data Validation Test suite" verbose="2">
+
+	<listeners>
+		<listener class-name="com.fission.callx.utilis.TestNGCustomReportListener" />
+	</listeners>
+
+	<test name="Reports Regression test">
+		<classes>
+			<class name="com.fission.callx.ReportsDataValidationDP" />
+			<!-- <class name="com.fission.callx.ReportsDataValidation" /> -->
+		</classes>
+	</test>
+
+	<test name="Sale Count Regression test">
+		<classes>
+			<class name="com.fission.callx.SalesCountDP" />
+			<!-- <class name="com.fission.callx.SalesCount" /> -->
+		</classes>
+	</test>
+
+</suite> <!-- Reports Regression Test Suite -->
