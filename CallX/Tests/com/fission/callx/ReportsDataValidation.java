@@ -73,6 +73,8 @@ public class ReportsDataValidation extends CommonSettings {
 				CALLXConstants.GLOBAL_TIMEOUT);
 
 		clickElement(driver, "Last_Month");
+		
+		sleep(2500);
 
 		waitUntilVisibility(driver, "Campaigns_Table_Data",
 				CALLXConstants.GLOBAL_TIMEOUT);

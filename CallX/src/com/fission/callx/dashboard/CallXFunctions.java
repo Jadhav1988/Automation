@@ -103,30 +103,30 @@ public class CallXFunctions extends CommonSettings {
 				if (d.get("path").textValue().replace("/map/", "").trim()
 						.contains("publisher_id")
 						|| d.get("path").textValue().replace("/map/", "")
-						.trim().contains("publisher_name")
+								.trim().contains("publisher_name")
 						|| d.get("path").textValue().replace("/map/", "")
-						.trim().contains("state")
+								.trim().contains("state")
 						|| d.get("path").textValue().replace("/map/", "")
-						.trim().contains("daypart")
+								.trim().contains("daypart")
 						|| d.get("path").textValue().replace("/map/", "")
-						.trim().contains("campaign_id")) {
+								.trim().contains("campaign_id")) {
 
 				} else {
 					System.err.println("ADD: -> "
 							+ d.get("path").textValue().replace("/map/", "")
-							.trim());
+									.trim());
 				}
 
 			} else if (d.get("op").textValue().equalsIgnoreCase("REMOVE")) {
 				if (d.get("path").textValue().replace("/map/", "").trim()
 						.contains("show_details")
 						|| d.get("path").textValue().replace("/map/", "")
-						.trim().contains("sales")) {
+								.trim().contains("sales")) {
 
 				} else {
 					System.err.println("REMOVE: -> "
 							+ d.get("path").textValue().replace("/map/", "")
-							.trim());
+									.trim());
 
 				}
 			}
@@ -190,10 +190,10 @@ public class CallXFunctions extends CommonSettings {
 								+ " != " + actualJson.get(keyFromObject.get(j)));
 						debugLogging(
 								keyFromObject.get(j)
-								+ " UI "
-								+ expectedJson.get(keyFromObject.get(j))
-								+ " != "
-								+ actualJson.get(keyFromObject.get(j)),
+										+ " UI "
+										+ expectedJson.get(keyFromObject.get(j))
+										+ " != "
+										+ actualJson.get(keyFromObject.get(j)),
 								"Error");
 					}
 
@@ -232,7 +232,7 @@ public class CallXFunctions extends CommonSettings {
 						|| keyFromObject.get(i).equals("unique_calls")
 						|| keyFromObject.get(i).equals(
 								"offers_not_available_count")
-								|| keyFromObject.get(i).equals("paid_calls")) {
+						|| keyFromObject.get(i).equals("paid_calls")) {
 
 					rowData.put(keyFromObject.get(i), Integer.parseInt(data
 							.get(keyFromObject.get(i)).toString()));
@@ -264,31 +264,33 @@ public class CallXFunctions extends CommonSettings {
 				} else if (keyFromObject.get(i).equals("avg_connect_duration")
 						|| keyFromObject.get(i).equals(
 								"avg_connect_duration_paid_calls")) {
-					String str = data
-							.getString(keyFromObject.get(i).toString());
-					if (keyFromObject.get(i).equals(
-							"avg_connect_duration_paid_calls")
-							&& str.equals("00:00")) {
-						rowData.put("avg_connect_duration_paid_calls",
-								"0".toString());
+					String avgCon = data.getString((keyFromObject.get(i))
+							.toString());
+					String[] avgArray = avgCon.split(":");
 
+					final NumberFormat nf = NumberFormat.getInstance();
+					nf.setMinimumFractionDigits(2);
+					nf.setMaximumFractionDigits(2);
+					nf.setGroupingUsed(false);
+
+					if (avgArray.length > 2) {
+						rowData.put(
+								keyFromObject.get(i),
+								nf.format(
+										Integer.parseInt(avgArray[2])
+												+ (60 * Integer
+														.parseInt(avgArray[1]))
+												+ (3600 * Integer
+														.parseInt(avgArray[0])))
+										.toString());
 					} else {
-
-						String avgCon = data.getString((keyFromObject.get(i))
-								.toString());
-						String avgConArray[] = avgCon.split(":");
-						int firstPart = Integer.parseInt(avgConArray[0]);
-						int secondPart = Integer.parseInt(avgConArray[1]);
-						int finalPart = (firstPart * 60) + secondPart;
-						Double d = new Double(finalPart);
-
-						final NumberFormat nf = NumberFormat.getInstance();
-						nf.setMinimumFractionDigits(2);
-						nf.setMaximumFractionDigits(2);
-						nf.setGroupingUsed(false);
-
-						rowData.put(keyFromObject.get(i), nf.format(d)
-								.toString());
+						rowData.put(
+								keyFromObject.get(i),
+								nf.format(
+										Integer.parseInt(avgArray[1])
+												+ (60 * Integer
+														.parseInt(avgArray[0])))
+										.toString());
 					}
 				} else if (keyFromObject.get(i).equals("show_details")
 						|| keyFromObject.get(i).equals("sale")) {
@@ -299,8 +301,8 @@ public class CallXFunctions extends CommonSettings {
 					rowData.put(keyFromObject.get(i),
 							"1"
 									+ data.getString(keyFromObject.get(i))
-									.replaceAll("-", "").trim()
-									.toString());
+											.replaceAll("-", "").trim()
+											.toString());
 				} else {
 					rowData.put(keyFromObject.get(i),
 							data.get(keyFromObject.get(i)).toString());
