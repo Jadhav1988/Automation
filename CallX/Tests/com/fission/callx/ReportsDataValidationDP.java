@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -40,9 +39,6 @@ public class ReportsDataValidationDP extends CommonSettings {
 	JerseyClient client = JerseyClient.getInstance();
 
 	CallXFunctions callXDash = new CallXFunctions();
-
-	JSONArray apiSortedArray;
-	JSONArray uiSortedArray;
 
 	@DataProvider(name = "reports")
 	public Object[][] getDataFromDataprovider(ITestContext c) throws Exception {
@@ -111,10 +107,13 @@ public class ReportsDataValidationDP extends CommonSettings {
 
 		clickElement(driver, durationLocator);
 
+		sleep(1000);
+
 		waitUntilVisibility(driver, tableHeaderLocator,
 				CALLXConstants.GLOBAL_TIMEOUT);
 
-		List<String> keySets = callXDash.getKeys(driver, tableHeaderLocator);
+		List<String> keySets = callXDash.keysetFromTableHeader(driver,
+				tableHeaderLocator);
 
 		waitUntilVisibility(driver, tableDataLocator,
 				CALLXConstants.GLOBAL_TIMEOUT);
@@ -130,34 +129,27 @@ public class ReportsDataValidationDP extends CommonSettings {
 
 		// Format the jSon array in specific format to compare with the API JSON
 		List<HashMap<String, Object>> formatedValue = callXDash
-				.formatedArray(uiJsonData.getJSONArray("data"));
+				.formatJSONArray(uiJsonData.getJSONArray("data"));
 		Map<String, List<HashMap<String, Object>>> formatedArray = new HashMap<String, List<HashMap<String, Object>>>();
 		formatedArray.put("data", formatedValue);
 		JSONObject object = new JSONObject(formatedArray);
 
 		debugLogging("Formated UI DATA : " + object, "Info");
 
-		String URL = callXDash.getURL(environment, apiURLCategory, fromDate,
-				toDate);
+		String responce = client.getClient(callXDash.getURL(environment,
+				apiURLCategory, fromDate, toDate));
 
-		String responce = client.getClient(URL);
-		debugLogging("API URL : " + URL, "Info");
+		debugLogging(
+				"API URL : "
+						+ callXDash.getURL(environment, apiURLCategory,
+								fromDate, toDate), "Info");
 
 		JSONObject apiJsonData = new JSONObject(responce);
 
 		debugLogging("Actual API responce : " + apiJsonData, "Info");
 
-		apiSortedArray = callXDash.sortJSONArray(
+		callXDash.compareTwoJsonArrays(object.getJSONArray("data"),
 				apiJsonData.getJSONArray("data"), sortingCriteria);
-		uiSortedArray = callXDash.sortJSONArray(object.getJSONArray("data"),
-				sortingCriteria);
-
-		debugLogging("Sorted UI DATA: " + uiSortedArray, "Info");
-		debugLogging("Sorted API DATA: " + apiSortedArray, "Info");
-
-		callXDash.compareTwoJsonArrays(uiSortedArray, apiSortedArray,
-				sortingCriteria);
-		callXDash.jsonDiff(uiSortedArray, apiSortedArray);
 
 	}
 

@@ -2,27 +2,19 @@ package com.fission.callx.dashboard;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fission.callx.WithPublisher;
 import com.fission.callx.utilis.CALLXConstants;
 import com.fission.callx.utilis.CallXException;
 import com.fission.callx.utilis.CommonSettings;
-import com.flipkart.zjsonpatch.JsonDiff;
 
 /**
  * 
@@ -35,118 +27,12 @@ public class CallXFunctions extends CommonSettings {
 	DateClass date = new DateClass();
 
 	/**
-	 * Sort the given JSONArray based upon the unique key value
-	 * 
-	 * @param arrayToSort
-	 * @param key
-	 * @return
-	 */
-	public JSONArray sortJSONArray(JSONArray arrayToSort, final String key) {
-
-		JSONArray sortedJsonArray = new JSONArray();
-
-		List<JSONObject> jsonValues = new ArrayList<JSONObject>();
-		for (int i = 0; i < arrayToSort.length(); i++) {
-			jsonValues.add(arrayToSort.getJSONObject(i));
-		}
-		Collections.sort(jsonValues, new Comparator<JSONObject>() {
-
-			@Override
-			public int compare(JSONObject a, JSONObject b) {
-				String valA = new String();
-				String valB = new String();
-
-				try {
-					valA = (String) a.get(key);
-					valB = (String) b.get(key);
-				} catch (JSONException e) {
-					// do something
-				}
-
-				return valA.compareTo(valB);
-				// if you want to change the sort order, simply use the
-				// following:
-				// return -valA.compareTo(valB);
-			}
-		});
-
-		for (int i = 0; i < arrayToSort.length(); i++) {
-			sortedJsonArray.put(jsonValues.get(i));
-		}
-
-		return sortedJsonArray;
-
-	}
-
-	/**
-	 * Compare the two JSONArray and return the parameter difference
-	 * 
-	 * @param expectedJsonObject
-	 * @param actualJsonObject
-	 */
-	public void jsonDiff(JSONArray expectedJsonObject,
-			JSONArray actualJsonObject) {
-		ObjectMapper mapper = new ObjectMapper();
-
-		mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
-		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-
-		JsonNode expectedJson = mapper.convertValue(expectedJsonObject,
-				JsonNode.class);
-		JsonNode actualJson = mapper.convertValue(actualJsonObject,
-				JsonNode.class);
-
-		JsonNode jsonDiff = JsonDiff.asJson(expectedJson, actualJson);
-
-		for (JsonNode d : jsonDiff) {
-			if (d.get("op").textValue().equalsIgnoreCase("ADD")) {
-				if (d.get("path").textValue().replace("/map/", "").trim()
-						.contains("publisher_id")
-						|| d.get("path").textValue().replace("/map/", "")
-								.trim().contains("publisher_name")
-						|| d.get("path").textValue().replace("/map/", "")
-								.trim().contains("state")
-						|| d.get("path").textValue().replace("/map/", "")
-								.trim().contains("daypart")
-						|| d.get("path").textValue().replace("/map/", "")
-								.trim().contains("campaign_id")) {
-
-				} else {
-					System.err.println("ADD: -> "
-							+ d.get("path").textValue().replace("/map/", "")
-									.trim());
-				}
-
-			} else if (d.get("op").textValue().equalsIgnoreCase("REMOVE")) {
-				if (d.get("path").textValue().replace("/map/", "").trim()
-						.contains("show_details")
-						|| d.get("path").textValue().replace("/map/", "")
-								.trim().contains("sales")) {
-
-				} else {
-					System.err.println("REMOVE: -> "
-							+ d.get("path").textValue().replace("/map/", "")
-									.trim());
-
-				}
-			}
-		}
-		debugLogging(
-				"Ignoring these API KEYS: "
-						+ " publisher_id,  publisher_name, state, daypart, campaign_id ",
-				"Info");
-
-		debugLogging("Ignoring these UI KEYS: " + " sales, show_details ",
-				"Info");
-	}
-
-	/**
-	 * Get the list of keys from the JSON
+	 * Get the keys from the first JSONObject in the given JSONArrays
 	 * 
 	 * @param array
 	 * @return
 	 */
-	public static List<String> getKeySet(JSONArray array) {
+	public static List<String> getKeySetFromJSON(JSONArray array) {
 		// if different json's are having keys then iterate the jsonObjects
 		JSONObject object = array.getJSONObject(0);
 		Set<String> keys = object.keySet();
@@ -157,24 +43,93 @@ public class CallXFunctions extends CommonSettings {
 	}
 
 	/**
-	 * Compare two JSONArray values and return the difference
+	 * Get the unique key and stores in a array
 	 * 
-	 * @param uiData
-	 * @param apiData
-	 * @throws CallXException
+	 * @param array
+	 * @param uniqueKey
+	 * @return
 	 */
+	public HashMap<WithPublisher, Integer> getUniqueKey(JSONArray array,
+			String uniqueKey) {
+		HashMap<WithPublisher, Integer> data = new HashMap<>();
+		for (int i = 0; i < array.length(); i++) {
+			WithPublisher uiPublisher = null;
+			if (uniqueKey.contains(",")) {
+				String[] values = uniqueKey.trim().split(",");
+				String first = values[0];
+				String second = values[1];
+				uiPublisher = new WithPublisher(array.getJSONObject(i)
+						.getString(first).replaceAll(",", ""), array
+						.getJSONObject(i).getString(second).replaceAll(",", ""));
+			} else {
+				uiPublisher = new WithPublisher(array.getJSONObject(i)
+						.getString(uniqueKey).replaceAll(",", ""), "");
+			}
+			data.put(uiPublisher, i);
+		}
+		return data;
+	}
+
+	/**
+	 * Return index unique key index
+	 * 
+	 * @param uniqueKeyArrayList
+	 * @param keyToMatch
+	 * @return
+	 */
+	public int getUniqueKeyIndex(ArrayList<String> uniqueKeyArrayList,
+			String keyToMatch) {
+		for (int i = 0; i < uniqueKeyArrayList.size(); i++) {
+			if (keyToMatch.equalsIgnoreCase(uniqueKeyArrayList.get(i))) {
+				debugLogging(keyToMatch + " -> " + i + " Actual key"
+						+ uniqueKeyArrayList.get(i), "Info");
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	public String returnOneUniqueKey(String criteria) {
+		if (criteria.contains(",")) {
+			String[] values = criteria.trim().split(",");
+			String second = values[1];
+			return second;
+		} else {
+			return criteria;
+		}
+
+	}
+
 	public void compareTwoJsonArrays(JSONArray uiData, JSONArray apiData,
 			String sortCriteria) throws CallXException {
 
-		List<String> keyFromObject = CallXFunctions.getKeySet(uiData);
+		List<String> keyFromObject = CallXFunctions.getKeySetFromJSON(uiData);
+		HashMap<WithPublisher, Integer> names = getUniqueKey(apiData,
+				sortCriteria);
 
 		if (uiData.length() == apiData.length()) {
-
+			debugLogging("sortCriteria : " + sortCriteria, "Info");
 			debugLogging(uiData.length() + " = " + apiData.length(), "Info");
-
+			WithPublisher uiPublisher = null;
 			for (int i = 0; i < uiData.length(); i++) {
+				if (sortCriteria.contains(",")) {
+					String[] values = sortCriteria.trim().split(",");
+					String first = values[0];
+					String second = values[1];
+					uiPublisher = new WithPublisher(uiData.getJSONObject(i)
+							.getString(first), uiData.getJSONObject(i)
+							.getString(second));
+				} else {
+					uiPublisher = new WithPublisher(uiData.getJSONObject(i)
+							.getString(sortCriteria), "");
+				}
+				debugLogging("uiPublisher : " + uiPublisher, "Info");
+				debugLogging("names : " + names, "Info");
+				int index = names.get(uiPublisher);
+				debugLogging("index : " + index, "info");
+
 				JSONObject expectedJson = uiData.getJSONObject(i);
-				JSONObject actualJson = apiData.getJSONObject(i);
+				JSONObject actualJson = apiData.getJSONObject(index);
 
 				for (int j = 0; j < keyFromObject.size(); j++) {
 					if (expectedJson.get(keyFromObject.get(j)).equals(
@@ -184,8 +139,11 @@ public class CallXFunctions extends CommonSettings {
 								+ " = " + actualJson.get(keyFromObject.get(j)),
 								"Info");
 					} else {
-						reporterLog(actualJson.get(sortCriteria) + " :  "
-								+ keyFromObject.get(j) + " UI "
+						reporterLog(expectedJson
+								.get(returnOneUniqueKey(sortCriteria))
+								+ " :  "
+								+ keyFromObject.get(j)
+								+ " UI "
 								+ expectedJson.get(keyFromObject.get(j))
 								+ " != " + actualJson.get(keyFromObject.get(j)));
 						debugLogging(
@@ -217,9 +175,9 @@ public class CallXFunctions extends CommonSettings {
 	 * @param array
 	 * @return
 	 */
-	public List<HashMap<String, Object>> formatedArray(JSONArray array) {
+	public List<HashMap<String, Object>> formatJSONArray(JSONArray array) {
 
-		List<String> keyFromObject = CallXFunctions.getKeySet(array);
+		List<String> keyFromObject = CallXFunctions.getKeySetFromJSON(array);
 		List<HashMap<String, Object>> values = new ArrayList<HashMap<String, Object>>();
 
 		for (int j = 0; j < array.length(); j++) {
@@ -344,8 +302,8 @@ public class CallXFunctions extends CommonSettings {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<String> getKeys(WebDriver driver, String tableHeder)
-			throws Exception {
+	public List<String> keysetFromTableHeader(WebDriver driver,
+			String tableHeder) throws Exception {
 
 		waitUntilVisibility(driver, tableHeder, CALLXConstants.GLOBAL_TIMEOUT);
 		List<WebElement> header = driver.findElements(getLocator(tableHeder));

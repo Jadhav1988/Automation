@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -18,7 +17,6 @@ import org.testng.annotations.Test;
 import com.fission.callx.dashboard.AdminDahboard;
 import com.fission.callx.dashboard.CallXFunctions;
 import com.fission.callx.utilis.CALLXConstants;
-import com.fission.callx.utilis.CallXException;
 import com.fission.callx.utilis.CommonSettings;
 import com.fission.callx.utilis.JerseyClient;
 import com.fission.callx.utilis.Log;
@@ -39,9 +37,6 @@ public class ReportsDataValidation extends CommonSettings {
 	JerseyClient client = JerseyClient.getInstance();
 
 	CallXFunctions callXDash = new CallXFunctions();
-
-	JSONArray apiSortedArray;
-	JSONArray uiSortedArray;
 
 	@BeforeTest
 	public void setup() throws FileNotFoundException, IOException {
@@ -69,18 +64,19 @@ public class ReportsDataValidation extends CommonSettings {
 
 		clickElement(driver, "Campaigns");
 
-		waitUntilVisibility(driver, "Last_Month",
-				CALLXConstants.GLOBAL_TIMEOUT);
+		waitUntilVisibility(driver, "Last_Month", CALLXConstants.GLOBAL_TIMEOUT);
 
 		clickElement(driver, "Last_Month");
-		
+
 		sleep(2500);
 
 		waitUntilVisibility(driver, "Campaigns_Table_Data",
 				CALLXConstants.GLOBAL_TIMEOUT);
 
-		List<String> keySets = callXDash.getKeys(driver,
+		List<String> keySets = callXDash.keysetFromTableHeader(driver,
 				"Campaigns_Table_Header");
+
+		debugLogging("Table header as Keys: " + keySets, "Info");
 
 		List<HashMap<String, String>> values = dash.getTableData(driver,
 				"Campaigns_Table_Data", keySets, 15);
@@ -92,7 +88,7 @@ public class ReportsDataValidation extends CommonSettings {
 
 		// Format the jSon array in specific format to compare with the API JSON
 		List<HashMap<String, Object>> formatedValue = callXDash
-				.formatedArray(uiJsonData.getJSONArray("data"));
+				.formatJSONArray(uiJsonData.getJSONArray("data"));
 		Map<String, List<HashMap<String, Object>>> formatedArray = new HashMap<String, List<HashMap<String, Object>>>();
 		formatedArray.put("data", formatedValue);
 		JSONObject object = new JSONObject(formatedArray);
@@ -107,21 +103,8 @@ public class ReportsDataValidation extends CommonSettings {
 
 		debugLogging("Actual API responce : " + apiJsonData, "Info");
 
-		apiSortedArray = callXDash.sortJSONArray(
+		callXDash.compareTwoJsonArrays(object.getJSONArray("data"),
 				apiJsonData.getJSONArray("data"), "campaign_name");
-		uiSortedArray = callXDash.sortJSONArray(object.getJSONArray("data"),
-				"campaign_name");
-
-		debugLogging("Sorted UI DATA: " + uiSortedArray, "Info");
-		debugLogging("Sorted API DATA: " + apiSortedArray, "Info");
-
-	}
-
-	@Test(priority = 2, description = "Comapre UI data and API responce", dependsOnMethods = "getReportData")
-	public void validateUIAnaAPIData() throws CallXException {
-		callXDash.compareTwoJsonArrays(uiSortedArray, apiSortedArray,
-				"campaign_name");
-		callXDash.jsonDiff(uiSortedArray, apiSortedArray);
 	}
 
 	@AfterMethod(alwaysRun = true)

@@ -63,7 +63,7 @@ public class AdminDahboard extends CommonSettings {
 	 */
 	public List<HashMap<String, String>> getTableData(WebDriver driver,
 			String tableDataLocator, List<String> keySet, int noOfColumns)
-					throws Exception {
+			throws Exception {
 
 		List<WebElement> data = driver
 				.findElements(getLocator(tableDataLocator));
@@ -87,6 +87,7 @@ public class AdminDahboard extends CommonSettings {
 			}
 		} else {
 			reporterLog("No Record Found");
+			debugLogging("No Record Found", "Error");
 			throw new SkipException("No record Found");
 		}
 
