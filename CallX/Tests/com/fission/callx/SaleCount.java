@@ -11,8 +11,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-
 import com.fission.callx.dashboard.AdminDahboard;
+import com.fission.callx.dashboard.CallXFunctions;
 import com.fission.callx.dashboard.SalesDashboard;
 import com.fission.callx.utilis.CALLXConstants;
 import com.fission.callx.utilis.CommonSettings;
@@ -25,6 +25,7 @@ public class SaleCount extends CommonSettings {
 
 	AdminDahboard dash = new AdminDahboard(driver);
 	SalesDashboard salesDash = new SalesDashboard();
+	CallXFunctions callXDash = new CallXFunctions();
 
 	/** The client. */
 	JerseyClient client = JerseyClient.getInstance();
@@ -71,10 +72,17 @@ public class SaleCount extends CommonSettings {
 		String responce = client.getClient(salesDash.getSalestURL(environment,
 				category, fromDuration, toDuration));
 
+		debugLogging(
+				"Sales API URL: "
+						+ salesDash.getSalestURL(environment, category,
+								fromDuration, toDuration), "Info");
+
 		JSONObject saleCountResponce = new JSONObject(responce);
-		System.out.println("API Responce: " + saleCountResponce);
+		debugLogging("Actual Sales API Responce. " + saleCountResponce, "Info");
 
 		JSONArray jarray = saleCountResponce.getJSONArray("data");
+
+		debugLogging("sales JSONArray Data: " + jarray, "Info");
 
 		salesDash.compareUiAndSaleCount(jarray, "campaignName",
 				"Campaigns_Table_Data", "Campaigns_Table_Header");

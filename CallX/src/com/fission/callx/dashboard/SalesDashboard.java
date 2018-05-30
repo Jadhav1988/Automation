@@ -90,11 +90,12 @@ public class SalesDashboard extends CommonSettings {
 									+ " -> SaleCount UI: "
 									+ salesCount.get(j).getText() + " = "
 									+ json.get("saleCount"), "Info");
+							break;
 						} else {
-							reporterLog(json.get(uniqueKey)
+							debugLogging(json.get(uniqueKey)
 									+ " -> SaleCount UI: "
 									+ salesCount.get(j).getText() + " != "
-									+ json.get("saleCount"));
+									+ json.get("saleCount"), "Info");
 							captureScreenShot(driver);
 						}
 
