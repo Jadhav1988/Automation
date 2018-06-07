@@ -10,10 +10,10 @@ public class SampleAndroidTest extends AndroidUtils {
 
 	String ipAddress = "127.0.0.1";
 	String portNumber = "4723";
-	String deviceName = "";
-	String deviceId = "";
+	String deviceName = "oneplus";
+	String deviceId = "f6fa808e";
 	String browserName = "Android";
-	String deviceOsVersion = "";
+	String deviceOsVersion = "8.1.0";
 	String deviceOsName = "Android";
 	String appPackageName = "com.oneplus.calculator";
 	String appActivityName = "com.oneplus.calculator.Calculator";
@@ -21,7 +21,7 @@ public class SampleAndroidTest extends AndroidUtils {
 	@BeforeTest
 	public void setup() throws Exception {
 		startAppiumServer(ipAddress, portNumber);
-		sleep(15000);
+		sleep(1000);
 		openMobileApp(driver, deviceName, deviceId, browserName,
 				deviceOsVersion, deviceOsName, appPackageName, appActivityName,
 				ipAddress, portNumber);
