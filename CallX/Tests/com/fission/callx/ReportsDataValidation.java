@@ -51,7 +51,8 @@ public class ReportsDataValidation extends CommonSettings {
 	public void adminLogin() throws Exception {
 		waitUntilInVisibility(driver, "admin.page.loader",
 				CALLXConstants.GLOBAL_TIMEOUT);
-		dash.adminLogin(driver, "admin@apl.com", "Redf0x32!!");
+		dash.adminLogin(driver, config.getProperty("UserName"),
+				config.getProperty("Password"));
 	}
 
 	@Test(priority = 1, description = "Get Table data Reports -> Campaigns", dependsOnMethods = "adminLogin")

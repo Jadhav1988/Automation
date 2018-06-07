@@ -75,7 +75,8 @@ public class SalesCountDP extends CommonSettings {
 	public void adminLogin() throws Exception {
 		waitUntilInVisibility(driver, "admin.page.loader",
 				CALLXConstants.GLOBAL_TIMEOUT);
-		dash.adminLogin(driver, "admin@apl.com", "Redf0x32!!");
+		dash.adminLogin(driver, config.getProperty("UserName"),
+				config.getProperty("Password"));
 
 		waitUntilVisibility(driver, "dashboard.reports",
 				CALLXConstants.GLOBAL_TIMEOUT);
